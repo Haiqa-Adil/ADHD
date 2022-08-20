@@ -1,6 +1,8 @@
-﻿using ADHD.Dto.booking;
+﻿using ADHD.Dto;
+using ADHD.Dto.booking;
 using ADHD.Dto.disorder;
 using ADHD.Dto.exercise;
+using ADHD.Models;
 using ADHD.Models.booking;
 using ADHD.Models.Disorder;
 using ADHD.Models.Exercise;
@@ -35,6 +37,10 @@ public class Mappers :Profile
         CreateMap<DailyMood, DailyModDto>()
                     .ReverseMap();
         CreateMap<Story, StoryDto>()
+                    .ReverseMap();
+        CreateMap<DisorderResult, AddSymptomScoreDto>()
+                    .ReverseMap();
+        CreateMap<Student, AddSymptomScoreDto>()
                     .ReverseMap();
 
     }

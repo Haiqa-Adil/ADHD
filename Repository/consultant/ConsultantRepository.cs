@@ -1,6 +1,6 @@
 ﻿using ADHD.Models.consultant;
-using ADHD.Middleware;
 using ADHD.Data;
+using ADHD.Middleware.consultant;
 
 namespace ADHD.Repository.consultant
 {

@@ -6,8 +6,7 @@
         public int StudentId { get; set; }
         public Student Student { get; set; }
         public string ReportId { get; set; }
-        public int Score { get; set; }
-        public int DiagnosedLevel { get; set; }
+        public string DiagnosedLevel { get; set; }
         public DateOnly LastUpdate { get; set; }
     }
 }

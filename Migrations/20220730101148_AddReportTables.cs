@@ -69,9 +69,9 @@ namespace ADHD.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    SymptomQuestionId = table.Column<int>(type: "int", nullable: false),
                     SymptomQuestionQuestionId = table.Column<int>(type: "int", nullable: false),
                     SymptomQuestionSymptomId = table.Column<int>(type: "int", nullable: false),
+                    SymptomQuestionId = table.Column<int>(type: "int", nullable: false),
                     OptionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

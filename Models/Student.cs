@@ -7,7 +7,7 @@ namespace ADHD.Models
 {
     public class Student
     {
-        public Guid GuidId { get; init; }
+        public Guid GuidId { get; init; } = new Guid();
         public string Name { get; init; }
         public int Age { get; init; }
         public Gender Gender { get; init; }

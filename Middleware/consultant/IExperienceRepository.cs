@@ -1,6 +1,6 @@
 ﻿using ADHD.Models.consultant;
 
-namespace ADHD.Middleware
+namespace ADHD.Middleware.consultant
 {
     public interface IExperienceRepository
     {

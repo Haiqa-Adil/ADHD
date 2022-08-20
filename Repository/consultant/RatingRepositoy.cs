@@ -1,4 +1,4 @@
-﻿using ADHD.Middleware;
+﻿using ADHD.Middleware.consultant;
 using ADHD.Models.consultant;
 
 namespace ADHD.Repository.consultant

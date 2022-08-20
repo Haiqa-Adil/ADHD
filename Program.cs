@@ -1,9 +1,13 @@
 using ADHD.Configuration;
 using ADHD.Data;
+using ADHD.Middleware;
 using ADHD.Middleware.disorder;
 using ADHD.Middleware.exercise;
+using ADHD.Middleware.score;
+using ADHD.Repository;
 using ADHD.Repository.disorder;
 using ADHD.Repository.exercise;
+using ADHD.Repository.score;
 using ADHD.Utils;
 using ADHD.UtilService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -68,6 +72,10 @@ builder.Services.AddScoped<IQuestionOptionRepository, QuestionOptionRepository>(
 builder.Services.AddScoped<IStoryRepository, StoryRepository>();
 builder.Services.AddScoped<IMoodJournalRepository, MoodJournalRepository>();
 builder.Services.AddScoped<IDailyMoodRepository, DailyMoodRepository>();
+builder.Services.AddScoped<IScoreRepository, ScoreRepository>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IStudentRepsitory, StudentRepository>();
 
 // Add services to the container.
 

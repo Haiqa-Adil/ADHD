@@ -24,6 +24,7 @@ namespace ADHD.Controllers
             var bookingModel = _mapper.Map<Booking>(bookingDto);
             var personalInfo = new JavaScriptSerializer().Serialize(bookingDto.PatientInfo);
             bookingModel.PatientInfo = personalInfo;
+
             return Ok(bookingModel);
         }
 
