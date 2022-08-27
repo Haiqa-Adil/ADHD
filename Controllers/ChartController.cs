@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ADHD.Configuration.Chart;
+using ADHD.UtilService;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
-using GenerateCharts.Models;
-using GenerateCharts.Services;
 
 namespace ADHD.Controllers
 {

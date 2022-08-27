@@ -12,7 +12,7 @@ namespace ADHD.Controllers
     public class BookingController : Controller
     {
         public IMapper _mapper;
-        IBookingRepository bookingRepository
+        IBookingRepository bookingRepository;
 
         public BookingController(IMapper mapper , IBookingRepository bookingRepository)
         {

@@ -28,6 +28,8 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
     <PackageReference Include="StackExchange.Redis" Version="2.6.48" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Syncfusion.XlsIO.Net.Core" Version="20.2.0.45" />
+    <PackageReference Include="FreeSpire.XLS" Version="12.7.0" />  
   </ItemGroup>
 
   <ItemGroup>
