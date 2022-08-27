@@ -5,6 +5,7 @@ namespace ADHD.Middleware.disorder
     public interface ISymptomQuestionRepository
     {
         Task<SymptomQuestion> AddSymptomQuestion(SymptomQuestion symptomQuestion);
-        Task<List<Question>> GetSymptomQuestion(int symptomId);
+        Task<List<SymptomQuestion>> GetSymptomQuestion(int symptomId);
+        Task<Symptom> FindSymptomQuestion(int id);
     }
 }

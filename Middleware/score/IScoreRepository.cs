@@ -4,7 +4,9 @@ namespace ADHD.Middleware.score
 {
     public interface IScoreRepository
     {
-        Task<DisorderResult> AddScore(List<DisorderResult> disorderResult);
+        Task<List<DisorderResult>> AddScore(List<DisorderResult> disorderResult);
+        Task<SymptomScore> AddDisorderScore(SymptomScore score);
         Task<DisorderResult> UpdateScore(DisorderResult disorderResult);
+        Task<SymptomScore> GetSymptomScore(DisorderResult disorderResult);
     }
 }

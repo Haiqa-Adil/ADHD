@@ -1,6 +1,7 @@
 ﻿using ADHD.Data;
 using ADHD.Middleware;
 using ADHD.Models.booking;
+using Microsoft.EntityFrameworkCore;
 
 namespace ADHD.Repository
 {
@@ -11,24 +12,37 @@ namespace ADHD.Repository
         {
             this.db = db;
         }
-        public Task<Booking> AddBooking(Booking booking)
+
+        public async Task<Booking> AddBooking(Booking booking)
         {
-            throw new NotImplementedException();
+            await db.Bookings.AddAsync(booking);
+            await db.SaveChangesAsync();
+            return booking;
         }
 
-        public Task<Booking> GetBookingById(int bookingId)
+        public async Task<Booking> GetBookingById(int bookingId)
         {
-            throw new NotImplementedException();
+            Booking? booking = await db.Bookings.FirstOrDefaultAsync(x => x.Id == bookingId);
+            return booking!;
         }
 
-        public Task<List<Booking>> GetBookingForConsultant(int consultantId)
+        public async Task<List<Booking>> GetBookingForConsultant(int consultantId)
         {
-            throw new NotImplementedException();
+            var booking = await db.Bookings.Where(x => x.ConsultantId == consultantId && 
+                    x.Date >= DateOnly.FromDateTime(DateTime.Now) ).ToListAsync();
+            return booking!;
         }
 
         public Task<List<Booking>> GetBookingForUser(int userId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Booking> GetBookingOnDate(DateTime date)
+        {
+            var booking = await db.Bookings.FirstOrDefaultAsync
+                (x => x.Date == DateOnly.FromDateTime(date));
+            return booking!;
         }
 
         public Task<Booking> UpdateBookingStatus(int status)

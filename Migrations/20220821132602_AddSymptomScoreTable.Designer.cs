@@ -3,6 +3,7 @@ using System;
 using ADHD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADHD.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220821132602_AddSymptomScoreTable")]
+    partial class AddSymptomScoreTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -409,13 +411,9 @@ namespace ADHD.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.HasKey("QuestionId", "SymptomId");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
 
                     b.HasIndex("SymptomId");
 
@@ -424,8 +422,9 @@ namespace ADHD.Migrations
 
             modelBuilder.Entity("ADHD.Models.DisorderResult", b =>
                 {
-                    b.Property<string>("StudentId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("StudentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<int>("SymptomQuestionId")
                         .HasColumnType("int");
@@ -552,6 +551,10 @@ namespace ADHD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("DiagnosedLevel")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<DateOnly>("LastUpdate")
                         .HasColumnType("date");
 
@@ -600,15 +603,11 @@ namespace ADHD.Migrations
 
             modelBuilder.Entity("ADHD.Models.SymptomScore", b =>
                 {
-                    b.Property<string>("StudentId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
 
                     b.Property<int>("SymptomId")
                         .HasColumnType("int");
-
-                    b.Property<string>("DiagnosedLevel")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<int>("DisorderId")
                         .HasColumnType("int");
@@ -616,7 +615,7 @@ namespace ADHD.Migrations
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Score")
+                    b.Property<int>("NoOfSymptomDetect")
                         .HasColumnType("int");
 
                     b.Property<Guid>("StudentGuidId")
@@ -716,24 +715,39 @@ namespace ADHD.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("ImageId")
-                        .HasColumnType("longtext");
-
                     b.Property<byte>("IsDeleted")
                         .HasColumnType("tinyint unsigned");
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("longblob");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("longblob");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("UserRole")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdentityUserId");
 
                     b.ToTable("Users");
                 });
@@ -1236,15 +1250,6 @@ namespace ADHD.Migrations
                         .IsRequired();
 
                     b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("ADHD.Models.User", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
-
-                    b.Navigation("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

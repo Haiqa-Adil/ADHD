@@ -19,11 +19,19 @@ namespace ADHD.Repository.disorder
             return symptomQuestion;
         }
 
-        public async Task<List<Question>> GetSymptomQuestion(int symptomId)
+        public async Task<Symptom> FindSymptomQuestion(int id)
+        {
+            var symptomQuestion = await db.SymptomQuestions
+                .Select(x => x.Symptom).FirstOrDefaultAsync(x => x.Id == id);
+            return symptomQuestion!;
+        }
+
+        public async Task<List<SymptomQuestion>> GetSymptomQuestion(int symptomId)
         {
             return await db.SymptomQuestions
                 .Where(x => x.Symptom.Id == symptomId)
-                .Select(x => x.Question).ToListAsync();
+                .Select(p => new SymptomQuestion { Id = p.Id , Question = p.Question , QuestionId = p.QuestionId})
+                .ToListAsync();
         }
     }
 }

@@ -2,6 +2,7 @@
 using ADHD.Dto.user;
 using ADHD.Middleware;
 using ADHD.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ADHD.Repository
 {
@@ -30,37 +31,42 @@ namespace ADHD.Repository
             return true;
         }
 
-        public User GetUserBuId(int userId)
+        public async Task<User> GetUserBuId(int userId)
         {
-            var user = db.Users.
+            var user = await db.Users.
                 Where(user => user.Id == userId).
-                FirstOrDefault();
+                FirstOrDefaultAsync();
 
             return user;
         }
 
-        public bool Login(string email , Byte[] password)
-        {   
-            var user = db.Users.
-                            Where(x => x.Email == email && x.PasswordHash == password).
-                            FirstOrDefault();
-            if(user == null)
-                return false;
-            
-            return true;
+        public bool Login(string email, string password)
+        {
+            throw new NotImplementedException();
         }
 
-        public User SignUp(User user)
+        /*        public bool Login(string email , string password)
+                {   
+                    var user = db.Users.
+                                    Where(x => x.Email == email && x.Password == password).
+                                    FirstOrDefault();
+                    if(user == null)
+                        return false;
+
+                    return true;
+                }
+        */
+        public async Task<User> SignUp(User user)
         {
-            db.Users.Add(user);
-            db.SaveChanges();
+            await db.Users.AddAsync(user);
+            await db.SaveChangesAsync();
 
             return user;
         }
 
-        public User UpdateUser(User user)
+        public async Task<User> UpdateUser(User user)
         {
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return user;
         }

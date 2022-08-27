@@ -22,9 +22,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)) ;
 });
 
+//Add URL Binding
+builder.WebHost.UseUrls("https://localhost:7200", "https://192.168.1.104:5081");
 // Add Authentication Configuration
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
 

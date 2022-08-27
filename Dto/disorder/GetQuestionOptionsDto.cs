@@ -4,8 +4,22 @@ namespace ADHD.Dto.disorder
 {
     public class GetQuestionOptionsDto
     {
-        public Question Question { get; set; }
-        public List<Option> Option { get; set; }
-        public GetQuestionOptionsDto() => Option = new List<Option>();
+        public int SymptomQuestionId { get; set; }
+        public GetQuestionDto Question { get; set; }
+        public List<GetOptionDto> Option { get; set; }
+        public GetQuestionOptionsDto() => Option = new List<GetOptionDto>();
+    }
+
+    public class GetQuestionDto
+    {
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public int QuestionType { get; set; }
+    }
+    public class GetOptionDto
+    {
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public int Marks { get; set; }
     }
 }

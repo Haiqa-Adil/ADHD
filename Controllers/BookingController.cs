@@ -1,4 +1,5 @@
 ﻿using ADHD.Dto.booking;
+using ADHD.Middleware;
 using ADHD.Models.booking;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,12 @@ namespace ADHD.Controllers
     public class BookingController : Controller
     {
         public IMapper _mapper;
+        IBookingRepository bookingRepository
 
-        public BookingController(IMapper mapper)
+        public BookingController(IMapper mapper , IBookingRepository bookingRepository)
         {
             _mapper = mapper;
+            this.bookingRepository = bookingRepository;
         }
 
 
@@ -22,7 +25,9 @@ namespace ADHD.Controllers
         public async Task<IActionResult> Booking([FromBody]BookingDto bookingDto)
         {
             var bookingModel = _mapper.Map<Booking>(bookingDto);
+            bookingModel.Date = DateOnly.FromDateTime(bookingDto.DateTime);
             var personalInfo = new JavaScriptSerializer().Serialize(bookingDto.PatientInfo);
+            await this.bookingRepository.AddBooking(bookingModel);
             bookingModel.PatientInfo = personalInfo;
 
             return Ok(bookingModel);

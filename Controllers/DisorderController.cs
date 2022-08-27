@@ -73,7 +73,7 @@ namespace ADHD.Controllers
         [HttpPost("symptom/question")]
         public async Task<IActionResult> AddSymptomQuesyion([FromBody] SymptomQuestionDto symptomQuestionDto)
         {
-            var symptomQuestionModel = _mapper.Map<SymptomQuestion>(symptomQuestionDto);
+               var symptomQuestionModel = _mapper.Map<SymptomQuestion>(symptomQuestionDto);
             var symptomQuestion = await _symptomQuestionRepository.AddSymptomQuestion(symptomQuestionModel);
             return Ok(symptomQuestionDto);
         }
@@ -91,28 +91,36 @@ namespace ADHD.Controllers
         public async Task<IActionResult> GetDisorder()
         {
                 var disorder = await _disorderRepository.GetDisorder();
-                return Ok(disorder);    
+            var disorderDto = new List<GetDisorderDto>();
+            disorder.ForEach(x => disorderDto.Add(_mapper.Map<GetDisorderDto>(x)));
+                return Ok(disorderDto);
         }
 
         [HttpGet("symptom/{disorderId}")]
         public async Task<IActionResult> Symptom(int disorderId)
         {
             var symptom = await _symptomRepository.GetSymptom(disorderId);
-            return Ok(symptom);
+            var symptomDto = new List<GetSymptomDto>();
+            symptom.ForEach(x => symptomDto.Add(_mapper.Map<GetSymptomDto>(x)));
+            return Ok(symptomDto);
         }
 
         [HttpGet("symptom/question/{symptomId}")]
         public async Task<IActionResult> QuestionOption(int symptomId)
         {
             var questionOptions = new List<GetQuestionOptionsDto>();
-            var questions = await _symptomQuestionRepository.GetSymptomQuestion(symptomId);
-            foreach(var question in questions)
+            var symptomquestions = await _symptomQuestionRepository.GetSymptomQuestion(symptomId);
+            foreach(var symptomQuestion in symptomquestions)
             {
-                var options = await _questionOptionRepository.GetQuestionOption(question.Id);
+                var questionDto = _mapper.Map<GetQuestionDto>(symptomQuestion.Question);
+                var options = await _questionOptionRepository.GetQuestionOption(questionDto.Id);
+                var optionsDto = new List<GetOptionDto>();
+                options.ForEach(x => optionsDto.Add(_mapper.Map<GetOptionDto>(x)));
                 GetQuestionOptionsDto questionOption = new()
                 {
-                    Question = question,
-                    Option = options,
+                    SymptomQuestionId = symptomQuestion.Id,
+                    Question = questionDto,
+                    Option = optionsDto,
                 };
                 questionOptions.Add(questionOption);
             }

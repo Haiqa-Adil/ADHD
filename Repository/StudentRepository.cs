@@ -19,6 +19,12 @@ namespace ADHD.Repository
             return student;
         }
 
+        public async Task<Student> GetStudentById(Guid id)
+        {
+            var student = await db.Students.FirstOrDefaultAsync(x => x.GuidId == id);
+            return student!;
+        }
+
         public async Task<List<Student>> GetStudents(int userId)
         {
             var students = await db.Students.Where(x => x.UserId == userId).ToListAsync();

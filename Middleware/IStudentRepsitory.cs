@@ -6,5 +6,6 @@ namespace ADHD.Middleware
     {
         Task<Student> AddStudent(Student student);
         Task<List<Student>> GetStudents(int userId);
+        Task<Student> GetStudentById(Guid id);
     }
 }

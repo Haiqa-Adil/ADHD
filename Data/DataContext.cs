@@ -36,6 +36,7 @@ namespace ADHD.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<DisorderResult> DisorderResults { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<SymptomScore> SymptomScores { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -45,12 +46,17 @@ namespace ADHD.Data
                 .HasKey(x => new { x.QuestionId ,x.OptionId });
             builder.Entity<SymptomQuestion>()
                 .HasKey(x => new {x.QuestionId, x.SymptomId });
+            builder.Entity<SymptomQuestion>()
+                .HasIndex(x => x.Id)
+                .IsUnique();
             builder.Entity<BookingSession>()
                     .HasKey(x => new { x.BookingId, x.SessionId });
             builder.Entity<DisorderResult>()
                     .HasKey(x => new { x.StudentId, x.SymptomQuestionId });
             builder.Entity<Student>()
                     .HasKey(x => new { x.UserId, x.GuidId });
+            builder.Entity<SymptomScore>()
+                    .HasKey(x => new { x.StudentId, x.SymptomId });
         }
     }
 }

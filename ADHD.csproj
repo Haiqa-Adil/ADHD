@@ -31,10 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\booking\" />
-    <Folder Include="Controllers\disorder\" />
-    <Folder Include="Controllers\exercise\" />
-    <Folder Include="Controllers\user\" />
     <Folder Include="Extensions\" />
     <Folder Include="Service\" />
   </ItemGroup>

@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ADHD.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class StudentController : Controller
     {
         private IStudentRepsitory studentRepsitory;
@@ -16,11 +18,29 @@ namespace ADHD.Controllers
             this.mapper = mapper;
         }
 
-        public IActionResult AddStudent(AddStudentDto studentDto)
+        [HttpPost("student")]
+        public async Task<IActionResult> AddStudent(AddStudentDto studentDto)
         {
             var studentModel = mapper.Map<Student>(studentDto);
-            studentRepsitory.AddStudent(studentModel);
-            return View(studentModel);
+            await studentRepsitory.AddStudent(studentModel);
+            return Ok(studentModel);
+        }
+
+        [HttpGet("student/{userId}")]
+        public async Task<IActionResult> GetStudent(int userId)
+        {
+            var student = await studentRepsitory.GetStudents(userId);
+            var studentDto = new List<GetStudentDto>();
+            student.ForEach( x => studentDto.Add(mapper.Map<GetStudentDto>(x)));
+            return Ok(studentDto);
+        }
+
+        [HttpGet("student/user/{studentId}")]
+        public async Task<IActionResult> GetStudentById(string studentId)
+        {
+            var student = await studentRepsitory.GetStudentById(Guid.Parse(studentId));
+            var studentDto = mapper.Map<GetStudentDto>(student);
+            return Ok(studentDto);
         }
     }
 }

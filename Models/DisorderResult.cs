@@ -6,8 +6,7 @@ namespace ADHD.Models
 {
     public class DisorderResult
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
         public Student Student { get; set; }
         public SymptomQuestion SymptomQuestion { get; set; }
         public int SymptomQuestionId { get; set; }

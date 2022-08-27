@@ -33,7 +33,7 @@ namespace ADHD.Models.booking{
         public Consultant Consultant { get; init; }
         public int ConsultantSessionId { get; init; }
         public ConsultantSession ConsultantSession { get; init; }
-        public DateOnly Date { get; init; }
+        public DateOnly Date { get; set; }
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }
         public BookingStatus bookingStatus { get; set; }

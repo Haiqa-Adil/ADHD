@@ -7,8 +7,7 @@ namespace ADHD.Dto.booking
     {
         public int UserId { get; init; }
         public int ConsultantId { get; init; }
-        public int ConsultantSessionId { get; init; }
-        //public DateTime Date { get; init; }
+        public DateTime DateTime { get; init; }
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }
         public Duration Duration { get; set; }

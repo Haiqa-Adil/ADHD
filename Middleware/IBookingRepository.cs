@@ -8,6 +8,7 @@ namespace ADHD.Middleware
         Task<List<Booking>> GetBookingForConsultant(int consultantId);
         Task<Booking> AddBooking(Booking booking);
         Task<Booking> GetBookingById(int bookingId);
+        Task<Booking> GetBookingOnDate(DateTime date);
         Task<Booking> UpdateBookingStatus(int status);
     }
 }

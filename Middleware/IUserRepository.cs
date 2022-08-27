@@ -5,10 +5,10 @@ namespace ADHD.Middleware
 {
     public interface IUserRepository
     {
-        User GetUserBuId(int userId);
-        User SignUp(User user);
-        bool Login(string email, byte[] password);
-        User UpdateUser(User user);
+        Task<User> GetUserBuId(int userId);
+        Task<User> SignUp(User user);
+        bool Login(string email, string password);
+        Task<User> UpdateUser(User user);
         bool DeleteUser(int userId);
     }
 }

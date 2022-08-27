@@ -2,6 +2,8 @@
 
 namespace ADHD.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ConsultantController : Controller
     {
         [HttpGet]

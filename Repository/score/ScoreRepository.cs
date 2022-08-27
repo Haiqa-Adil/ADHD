@@ -11,11 +11,24 @@ namespace ADHD.Repository.score
         {
             this.db = db;
         }
-        public async Task<DisorderResult> AddScore(List<DisorderResult> disorderResult)
+
+        public async Task<SymptomScore> AddDisorderScore(SymptomScore score)
+        {
+            await db.SymptomScores.AddAsync(score);
+            await db.SaveChangesAsync();
+            return score;
+        }
+
+        public async Task<List<DisorderResult>> AddScore(List<DisorderResult> disorderResult)
         {
             await db.DisorderResults.AddRangeAsync();
             await db.SaveChangesAsync();
-            return disorderResult[0];
+            return disorderResult;
+        }
+
+        public Task<SymptomScore> GetSymptomScore(DisorderResult disorderResult)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<DisorderResult> UpdateScore(DisorderResult disorderResult)

@@ -3,6 +3,7 @@ using System;
 using ADHD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADHD.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220822204412_ChangeForiegnKeyType")]
+    partial class ChangeForiegnKeyType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -552,6 +554,10 @@ namespace ADHD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("DiagnosedLevel")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<DateOnly>("LastUpdate")
                         .HasColumnType("date");
 
@@ -600,15 +606,11 @@ namespace ADHD.Migrations
 
             modelBuilder.Entity("ADHD.Models.SymptomScore", b =>
                 {
-                    b.Property<string>("StudentId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
 
                     b.Property<int>("SymptomId")
                         .HasColumnType("int");
-
-                    b.Property<string>("DiagnosedLevel")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<int>("DisorderId")
                         .HasColumnType("int");
@@ -616,7 +618,7 @@ namespace ADHD.Migrations
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Score")
+                    b.Property<int>("NoOfSymptomDetect")
                         .HasColumnType("int");
 
                     b.Property<Guid>("StudentGuidId")
