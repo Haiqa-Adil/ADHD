@@ -30,6 +30,7 @@ namespace ADHD.Controllers
         public async Task<IActionResult> AddMoodJournal(MoodJournalDto moodJournalDto)
         {
             var moodJournal = mapper.Map<MoodJournal>(moodJournalDto);
+            moodJournal.CreateDate = DateTime.Now;
             await moodJournalRepository.AddMoodJournal(moodJournal);
             return Ok(moodJournal);
         }
