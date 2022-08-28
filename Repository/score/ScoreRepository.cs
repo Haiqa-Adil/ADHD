@@ -21,7 +21,7 @@ namespace ADHD.Repository.score
 
         public async Task<List<DisorderResult>> AddScore(List<DisorderResult> disorderResult)
         {
-            await db.DisorderResults.AddRangeAsync();
+            await db.DisorderResults.AddRangeAsync(disorderResult);
             await db.SaveChangesAsync();
             return disorderResult;
         }

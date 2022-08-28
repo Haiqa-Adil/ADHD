@@ -20,6 +20,12 @@ namespace ADHD.Repository.disorder
             return symptom;
         }
 
+        public async Task<List<Symptom>> AddSymptomList(List<Symptom> symptom)
+        {
+            await db.Symptoms.AddRangeAsync(symptom);
+            await db.SaveChangesAsync();
+            return symptom;
+        }
         public async Task<List<Symptom>> GetSymptom(int disorderId)
         {
             var symptom = await db.Symptoms.Where(x => x.Disorder.Id == disorderId).ToListAsync();

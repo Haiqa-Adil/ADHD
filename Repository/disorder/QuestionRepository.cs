@@ -18,5 +18,12 @@ namespace ADHD.Repository.disorder
             await db.SaveChangesAsync();
             return question;
         }
+
+        public async Task<List<Question>> AddQuestionList(List<Question> question)
+        {
+            await db.Questions.AddRangeAsync(question);
+            await db.SaveChangesAsync();
+            return question;
+        }
     }
 }

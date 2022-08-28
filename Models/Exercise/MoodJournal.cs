@@ -5,7 +5,7 @@ namespace ADHD.Models.Exercise
     {
         public int Id { get; init; } 
         public string Text { get; init; }
-        public DateTime CreateDate { get; init; }
+        public DateTime CreateDate { get; set; }
         public float Anger { get; init; }
         public float Joy { get; init; }
         public float Love { get; init; }
