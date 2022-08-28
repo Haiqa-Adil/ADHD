@@ -20,6 +20,12 @@ namespace ADHD.Repository.disorder
             return option;
         }
 
+        public async Task<List<QuestionOption>> AddQuestionOptionList(List<QuestionOption> option)
+        {
+            await db.QuestionOption.AddRangeAsync(option);
+            await db.SaveChangesAsync();
+            return option;
+        }
         public async Task<List<Option>> GetQuestionOption(int questionId)
         {
             return await db.QuestionOption

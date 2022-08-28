@@ -20,6 +20,14 @@ namespace ADHD.Repository.disorder
             return option;
         }
 
+
+        public async Task<List<Option>> AddOptionList(List<Option> option)
+        {
+            await db.Options.AddRangeAsync(option);
+            await db.SaveChangesAsync();
+            return option;
+        }
+
         public Option GetOptionById(int optionId)
         {
             var option = db.Options.FirstOrDefault(x => x.Id == optionId);

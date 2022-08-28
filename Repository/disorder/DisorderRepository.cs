@@ -31,5 +31,15 @@ namespace ADHD.Repository.disorder
             return disorder;
 
         }
+
+
+        public async Task<List<Disorder>> AddDisorderList(List<Disorder> disorder)
+        {
+            await db.Disorders.AddRangeAsync(disorder);
+            await db.SaveChangesAsync();
+            return disorder;
+
+        }
+
     }
 }

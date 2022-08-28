@@ -63,7 +63,7 @@ namespace ADHD.Controllers
 
         private bool AssesstBefore(List<AddSymptomScoreDto> scoreDto)
         {
-            return true;
+            return false;
         }
 
         private string scoring(int disorderId , int totalScore)

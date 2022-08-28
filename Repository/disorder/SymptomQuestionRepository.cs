@@ -12,10 +12,19 @@ namespace ADHD.Repository.disorder
         {
             this.db = db;
         }
+
         public async Task<SymptomQuestion> AddSymptomQuestion(SymptomQuestion symptomQuestion)
         {
             await db.SymptomQuestions.AddAsync(symptomQuestion);
             await db.SaveChangesAsync();
+            return symptomQuestion;
+        }
+
+        public async Task<List<SymptomQuestion>> AddSymptomQuestionList(List<SymptomQuestion> symptomQuestion)
+        {
+            await db.SymptomQuestions.AddRangeAsync(symptomQuestion);
+            await db.SaveChangesAsync();
+            Console.WriteLine(symptomQuestion[symptomQuestion.Count - 1]);
             return symptomQuestion;
         }
 

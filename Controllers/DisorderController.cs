@@ -87,6 +87,63 @@ namespace ADHD.Controllers
 
         }
 
+        [HttpPost("disorder/list")]
+        public async Task<IActionResult> AddDisorderList([FromBody] List<DisorderDto> disorderDto)
+        {
+            var disorderModel = new List<Disorder>();
+            disorderDto.ForEach(x => disorderModel.Add(_mapper.Map<Disorder>(x)));
+            var disorder = await _disorderRepository.AddDisorderList(disorderModel);
+            return Ok(disorderDto);
+
+        }
+
+        [HttpPost("symptom/list")]
+        public async Task<IActionResult> AddSymptomList([FromBody] List<SymptomDto> symptomDto)
+        {
+            var symptomModel = new List<Symptom>();
+            symptomModel.ForEach( x => symptomModel.Add( _mapper.Map<Symptom>(x)));
+            var symptom = await _symptomRepository.AddSymptomList(symptomModel);
+            return Ok(symptomDto);
+        }
+
+        [HttpPost("question/list")]
+        public async Task<IActionResult> AddQuestionList([FromBody] List<QuestionDto> questionDto)
+        {
+            var questionModel = new List<Question>();
+            questionDto.ForEach(x => questionModel.Add(_mapper.Map<Question>(x)));
+            var question = await _questionRepository.AddQuestionList(questionModel);
+            return Ok(questionDto);
+        }
+
+        [HttpPost("option/list")]
+        public async Task<IActionResult> AddOptionList([FromBody] List<OptionDto> optionDto)
+        {
+            var optionModel = new List<Option>();
+            optionDto.ForEach(x =>  optionModel.Add(_mapper.Map<Option>(x)));
+            var option = await _optionRepository.AddOptionList(optionModel);
+            return Ok(optionDto);
+
+        }
+
+        [HttpPost("symptom/question/list")]
+        public async Task<IActionResult> AddSymptomQuesyionList([FromBody] List<SymptomQuestionDto> symptomQuestionDto)
+        {
+            var symptomQuestionModel = new List<SymptomQuestion>();
+            symptomQuestionDto.ForEach(x => symptomQuestionModel.Add(_mapper.Map<SymptomQuestion>(x)));
+            var symptomQuestion = await _symptomQuestionRepository.AddSymptomQuestionList(symptomQuestionModel);
+            return Ok(symptomQuestionDto);
+        }
+
+        [HttpPost("question/option/list")]
+        public async Task<IActionResult> AddQuestionOptionList([FromBody] List<QuestionOptionDto> questionOptionDto)
+        {
+            var questionOptionModel = new List<QuestionOption>();
+            questionOptionDto.ForEach(x => questionOptionModel.Add(_mapper.Map<QuestionOption>(x)));
+            var questionOption = await _questionOptionRepository.AddQuestionOptionList(questionOptionModel);
+            return Ok(questionOptionDto);
+
+        }
+
         [HttpGet("disorder")]
         public async Task<IActionResult> GetDisorder()
         {
